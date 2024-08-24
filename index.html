@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarization Tool</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <style>
+        body {
+            background-color: #f1f4c6;
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
+
+        .main-container {
+            max-width: 850px;
+            background-color: #d6d0b8;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group input[type="file"] {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .alert-box {
+            margin-top: 20px;
+        }
+
+        h1, h2 {
+            color: #444;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-top: 30px;
+        }
+
+        p {
+            background-color: #eef2f5;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            line-height: 1.8;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-custom {
+            background-color: #ffe76a;
+            border-color: #ffe76a;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #e0ab5b;
+            border-color: #e0ab5b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container main-container">
+        <h1>Text Summarization Tool</h1>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="file" required>
+            </div>
+            <button type="submit" class="btn btn-custom btn-lg">Generate Summary</button>
+        </form>
+
+        {% if text %}
+        <div class="mt-5">
+            <h2>Original Content</h2>
+            <p>{{ text }}</p>
+        </div>
+        {% endif %}
+
+        {% if matched_texts %}
+        <div class="mt-5">
+            <h2>Highlighted Matches</h2>
+            <ul>
+                {% for matched_text in matched_texts %}
+                <li>{{ matched_text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if summary %}
+        <div class="mt-5">
+            <h2>Text Summary</h2>
+            <p>{{ summary }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger alert-box" role="alert">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
